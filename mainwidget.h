@@ -14,13 +14,11 @@ class MainWidget : public QWidget
 
 public:
     MainWidget(QWidget *parent = nullptr);
-    ~MainWidget();
+    ~MainWidget() override;
 
 protected:
     virtual void paintEvent(QPaintEvent *e) override;
 
-private:
-    QList<QPointer<QPixmap>> pixmapList;
 };
 
 #endif // MAINWIDGET_H
