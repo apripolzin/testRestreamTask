@@ -1,7 +1,10 @@
 #include <QApplication>
+#include <QThread>
+#include <QDebug>
 
 #include "mainwidget.h"
 #include "picturewidget.h"
+#include "createimagesworker.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,10 +12,17 @@ int main(int argc, char *argv[])
     MainWidget w;
     w.show();
 
-    PictureWidget pw("images/Autumn.jpg");
-    pw.setParent(&w);
-    pw.move(10,10);
-    pw.show();
+    CreateImagesWorker worker;
+    worker.start();
+
+    QObject::connect(&worker, &CreateImagesWorker::imageCreated, [=](){
+        qDebug() << "Image Created";
+    });
+
+//    PictureWidget pw("images/Autumn.jpg");
+//    pw.setParent(&w);
+//    pw.move(10,10);
+//    pw.show();
 
     return a.exec();
 }
