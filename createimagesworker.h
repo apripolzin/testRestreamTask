@@ -2,11 +2,10 @@
 #define CREATEIMAGESWORKER_H
 
 #include <QThread>
-#include <QSharedPointer>
-
-#include "picturewidget.h"
 
 #define IMG_PATH "images"
+
+class QPixmap;
 
 class CreateImagesWorker : public QThread
 {
@@ -19,7 +18,7 @@ protected:
     virtual void run() override;
 
 signals:
-    void imageCreated(QSharedPointer<PictureWidget> pw);
+    void imageCreated(QPixmap *pixmap);
 
 };
 

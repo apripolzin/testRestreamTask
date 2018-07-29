@@ -1,5 +1,4 @@
 #include <QApplication>
-#include <QThread>
 #include <QDebug>
 
 #include "mainwidget.h"
@@ -15,14 +14,7 @@ int main(int argc, char *argv[])
     CreateImagesWorker worker;
     worker.start();
 
-    QObject::connect(&worker, &CreateImagesWorker::imageCreated, [=](){
-        qDebug() << "Image Created";
-    });
-
-//    PictureWidget pw("images/Autumn.jpg");
-//    pw.setParent(&w);
-//    pw.move(10,10);
-//    pw.show();
+    QObject::connect(&worker, &CreateImagesWorker::imageCreated, &w, &MainWidget::appendPicture);
 
     return a.exec();
 }

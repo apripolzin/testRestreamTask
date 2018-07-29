@@ -1,3 +1,6 @@
+#include <QDebug>
+#include <QThread>
+#include <QApplication>
 #include "mainwidget.h"
 #include "picturewidget.h"
 
@@ -11,7 +14,14 @@ MainWidget::~MainWidget()
 {
 }
 
-void MainWidget::paintEvent(QPaintEvent *e)
+//void MainWidget::paintEvent(QPaintEvent *e)
+//{
+//    QWidget::paintEvent(e);
+//}
+
+void MainWidget::appendPicture(QPixmap *pix)
 {
-    QWidget::paintEvent(e);
+    PictureWidget *pw = new PictureWidget(pix);
+    pw->setParent(this);
+    pw->show();
 }

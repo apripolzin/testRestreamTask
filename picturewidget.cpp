@@ -1,18 +1,17 @@
 #include "picturewidget.h"
 #include <QPainter>
 #include <QDebug>
-#include <QFile>
 
-PictureWidget::PictureWidget(const QString &img_filename, QWidget *parent/*=nullptr*/) :
-      QWidget(parent), m_img_filepath(img_filename)
+
+PictureWidget::PictureWidget(QPixmap *image, QWidget *parent/*=nullptr*/) :
+      QWidget(parent), thumbnail(image)
 {
-    //qDebug() << QFile(m_img_filepath).exists() ;
     this->setFixedSize(100, 100);
-    thumbnail = QPixmap(m_img_filepath).scaledToWidth(this->width()-10);
 }
 
 PictureWidget::~PictureWidget()
 {
+    delete thumbnail;
 }
 
 void PictureWidget::paintEvent(QPaintEvent *e)
@@ -21,9 +20,9 @@ void PictureWidget::paintEvent(QPaintEvent *e)
     QPainter painter(this);
 
     painter.save();
-    QRect rect = thumbnail.rect();
+    QRect rect = thumbnail->rect();
     rect.moveCenter(this->rect().center());
-    painter.drawPixmap(rect, thumbnail);
+    painter.drawPixmap(rect, *thumbnail);
     painter.restore();
 
     painter.save();

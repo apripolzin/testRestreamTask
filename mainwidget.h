@@ -3,10 +3,12 @@
 
 #include <QWidget>
 #include <QList>
-#include <QPixmap>
-#include <QPointer>
+
+#include "picturewidget.h"
 
 #define IMG_FILES_PATH "images"
+
+class QPixmap;
 
 class MainWidget : public QWidget
 {
@@ -16,8 +18,8 @@ public:
     MainWidget(QWidget *parent = nullptr);
     ~MainWidget() override;
 
-protected:
-    virtual void paintEvent(QPaintEvent *e) override;
+public slots:
+    void appendPicture(QPixmap *pix);
 
 };
 
