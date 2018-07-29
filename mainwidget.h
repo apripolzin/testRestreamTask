@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QList>
+#include "picturewidget.h"
 
 #include "picturewidget.h"
 
@@ -20,6 +21,14 @@ public:
 
 public slots:
     void appendPicture(QPixmap *pix);
+
+private:
+    QList<PictureWidget*> pics;
+
+private:
+    int getRandomX() const;
+    int getRandomY() const;
+    mutable uint seed;
 
 };
 

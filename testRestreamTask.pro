@@ -32,4 +32,5 @@ SOURCES += \
 HEADERS += \
         mainwidget.h \
     picturewidget.h \
-    createimagesworker.h
+    createimagesworker.h \
+    random.hpp
