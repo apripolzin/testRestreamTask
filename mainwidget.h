@@ -28,8 +28,9 @@ private:
 private:
     int getRandomX() const;
     int getRandomY() const;
-    mutable uint seed;
+    QPoint getRandomPoint() const;
 
+    bool collides(const QRect &r1, const QRect &r2) const;
 };
 
 #endif // MAINWIDGET_H

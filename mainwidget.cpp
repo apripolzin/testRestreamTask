@@ -22,12 +22,9 @@ MainWidget::~MainWidget()
 void MainWidget::appendPicture(QPixmap *pix)
 {
     PictureWidget *pw = new PictureWidget(pix);
-    pics.append(pw);
     pw->setParent(this);
-    int x = getRandomX();
-    int y = getRandomY();
-    qDebug() << x << y;
-    pw->move(x,y);
+    pw->move(getRandomPoint());
+    pics.append(pw);
     pw->show();
 }
 
@@ -39,4 +36,33 @@ int MainWidget::getRandomX() const
 int MainWidget::getRandomY() const
 {
     return Random::get(0, this->height()-100);
+}
+
+QPoint MainWidget::getRandomPoint() const
+{
+    //Create rect for widget
+    QPoint widTopleft(getRandomX(), getRandomY());
+    QRect widrect(widTopleft, QSize(100, 100));
+
+    foreach (PictureWidget *pic, pics){
+        qApp->processEvents();
+        QPoint topLeft = pic->pos();
+        QRect rect(topLeft, QSize(100,100));
+        if (collides(widrect, rect)){
+            return getRandomPoint();
+        }
+    }
+
+    return widTopleft;
+}
+
+bool MainWidget::collides(const QRect &r1, const QRect &r2) const
+{
+    QPoint topLeft1 = r1.topLeft();
+    QPoint topLeft2 = r2.topLeft();
+
+    QPoint bottomRight1 = r1.bottomRight();
+    QPoint bottomRight2 = r2.bottomRight();
+
+    return false;
 }
