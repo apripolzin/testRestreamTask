@@ -19,6 +19,7 @@ int main(int argc, char **argv)
     QObject::connect(&w, &MainWidget::closing, [=](){
         worker->terminate();
     });
+    QObject::connect(worker, &CreateImagesWorker::pathNotExists, &w, &MainWidget::pathNotFound);
 
     return a.exec();
 }

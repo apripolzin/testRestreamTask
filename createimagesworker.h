@@ -19,6 +19,7 @@ protected:
 
 signals:
     void imageCreated(QPixmap *pixmap);
+    void pathNotExists(const QString& mes);
 
 };
 

@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <algorithm>
 #include <cmath>
+#include <QMessageBox>
 
 #include "mainwidget.h"
 #include "random.hpp"
@@ -185,4 +186,10 @@ void MainWidget::closeEvent(QCloseEvent *e)
 {
     emit closing();
     e->accept();
+}
+
+void MainWidget::pathNotFound(const QString &mes)
+{
+    QMessageBox::critical(this, "Path not found", mes);
+    this->close();
 }

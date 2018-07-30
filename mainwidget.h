@@ -50,6 +50,9 @@ protected:
 
 signals:
     void closing();
+
+public slots:
+    void pathNotFound(const QString &mes);
 };
 
 #endif // MAINWIDGET_H
