@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QDebug>
+#include <QPointer>
 
 #include "mainwidget.h"
 #include "picturewidget.h"
@@ -11,10 +12,13 @@ int main(int argc, char **argv)
     MainWidget w;
     w.show();
 
-    CreateImagesWorker worker;
-    worker.start();
+    QPointer<CreateImagesWorker> worker = new CreateImagesWorker;
+    worker->start();
 
-    QObject::connect(&worker, &CreateImagesWorker::imageCreated, &w, &MainWidget::appendPicture);
+    QObject::connect(worker, &CreateImagesWorker::imageCreated, &w, &MainWidget::appendPicture);
+    QObject::connect(&w, &MainWidget::closing, [=](){
+        worker->terminate();
+    });
 
     return a.exec();
 }

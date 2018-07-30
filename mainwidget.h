@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QList>
-#include "picturewidget.h"
 
 #include "picturewidget.h"
 
@@ -31,6 +30,26 @@ private:
     QPoint getRandomPoint() const;
 
     bool collides(const QRect &r1, const QRect &r2) const;
+
+private:
+    bool firstIsSelected;
+
+protected:
+    virtual void keyPressEvent(QKeyEvent *e) override;
+
+private:
+    enum PathToSelect {
+        PATH_LEFT, PATH_RIGHT, PATH_TOP, PATH_BOTTOM
+    };
+    virtual void selectNextImage(const PathToSelect path);
+
+    PictureWidget *getSeletedPicture() const;
+
+protected:
+    virtual void closeEvent(QCloseEvent *e) override;
+
+signals:
+    void closing();
 };
 
 #endif // MAINWIDGET_H

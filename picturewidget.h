@@ -16,6 +16,15 @@ protected:
 
 private:
     QPixmap *thumbnail;
+
+public:
+    QPoint getCenter() const;
+
+    bool getIsSelected() const;
+    void setSelected(bool value);
+
+private:
+    bool selected;
 };
 
 #endif // PICTUREWIDGET_H
